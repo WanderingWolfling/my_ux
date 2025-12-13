@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/site_styles.css">
+  <title>Animal Profile</title>
+</head>
+<body>
+
+<header>
+  <div class="logo">Logo</div>
+  <div class="center">Animal Profile</div>
+  <nav>
+    <a href="#">Share</a>
+    <a href="animal_site.html">Back to site</a>
+  </nav>
+</header>
+
+<main class="animal-profile">
+
+  <section class="animal-main">
+    <div class="animal-photo">
+      <img src="image/vital.jpg" alt="Vitalik">
+    </div>
+
+    <div class="animal-info">
+      <h1>Vitalik</h1>
+      <p class="type">Mačka</p>
+
+      <ul>
+        <li><strong>Vek:</strong> 10 rokov</li>
+        <li><strong>Charakter:</strong> pokojný</li>
+        <li><strong>Lekárska prehliadka:</strong> Kompletné očkovania</li>
+        <li><strong>Zdravotný stav:</strong> stabilný</li>
+        <li><strong>Preferencie:</strong> tiché prostredie</li>
+        <li><strong>Rod:</strong> Škótska klapouchá</li>
+      </ul>
+
+      <button class="accept-btn">Accept</button>
+    </div>
+  </section>
+
+  <section class="animal-gallery">
+    <h2>Ďalšie fotografie</h2>
+    <div class="gallery-grid">
+      <img src="https://placekitten.com/200/200">
+      <img src="https://placekitten.com/201/200">
+      <img src="https://placekitten.com/202/200">
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Animal Adoption</p>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="decisionModal">
+  <div class="modal-box">
+    <p>
+      Vaše rozhodnutie je v<br>
+      procese posudzovania
+    </p>
+    <button id="modalOk">OK</button>
+  </div>
+</div>
+
+<script>
+  const acceptBtn = document.querySelector('.accept-btn');
+  const modal = document.getElementById('decisionModal');
+  const modalOk = document.getElementById('modalOk');
+
+  acceptBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  modalOk.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

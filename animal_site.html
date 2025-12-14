@@ -19,11 +19,10 @@
             <button class="profile-btn">My profile</button>
 
             <div class="profile-dropdown">
-        <a href="profile_page.html">O sebe</a>
-        <a href="liked_animals.html">Liked animals</a>
-        <a href="login_page.html">Exit</a>
+                <a href="profile_page.html">O sebe</a>
+                <a href="liked_animals.html">Liked animals</a>
+                <a href="login_page.html">Exit</a>
             </div>
-
         </div>
     </nav>
 </header>
@@ -36,6 +35,7 @@
 
     <a href="animal_profile.html" class="animal-link">
         <div class="animal-card">
+            <button class="like-btn" type="button">♡</button>
             <img src="image/vital.jpg" alt="Vitalik">
             <h3>Vitalik</h3>
             <p>Mačka</p>
@@ -44,6 +44,7 @@
 
     <a href="animal_profile.html" class="animal-link">
         <div class="animal-card">
+            <button class="like-btn" type="button">♡</button>
             <img src="https://placekitten.com/201/200" alt="Molly">
             <h3>Molly</h3>
             <p>Pes</p>
@@ -52,6 +53,7 @@
 
     <a href="animal_profile.html" class="animal-link">
         <div class="animal-card">
+            <button class="like-btn" type="button">♡</button>
             <img src="https://placekitten.com/202/200" alt="Kotets">
             <h3>Kotets</h3>
             <p>Mačka</p>
@@ -69,7 +71,8 @@
   const profileBtn = document.querySelector('.profile-btn');
   const dropdown = document.querySelector('.profile-dropdown');
 
-  profileBtn.addEventListener('click', () => {
+  profileBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     dropdown.style.display =
       dropdown.style.display === 'block' ? 'none' : 'block';
   });
@@ -78,6 +81,17 @@
     if (!e.target.closest('.profile-menu')) {
       dropdown.style.display = 'none';
     }
+  });
+
+  /* ===== LIKE BUTTON SCRIPT ===== */
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();      // ❌ отменяет переход
+      e.stopPropagation();    // ❌ отменяет клик по карточке
+
+      btn.classList.toggle('liked');
+      btn.textContent = btn.classList.contains('liked') ? '♥' : '♡';
+    });
   });
 </script>
 

@@ -20,7 +20,8 @@
 
   <a href="animal_profile.html" class="animal-link">
     <div class="animal-card liked">
-      <span class="star">★</span>
+      <button class="like-btn liked" type="button">♥</button>
+
       <img src="image/vital.jpg">
       <h3>Vitalik</h3>
       <p>Vyslouchy Britanec · 9 rokov</p>
@@ -29,7 +30,8 @@
 
   <a href="animal_profile.html" class="animal-link">
     <div class="animal-card liked">
-      <span class="star">★</span>
+      <button class="like-btn liked" type="button">♥</button>
+
       <img src="image/vital.jpg">
       <h3>Vitalik</h3>
       <p>Vyslouchy Britanec · 9 rokov</p>
@@ -38,7 +40,7 @@
 
   <a href="animal_profile.html" class="animal-link">
     <div class="animal-card liked">
-      <span class="star">★</span>
+      <button class="like-btn liked" type="button">♥</button>
       <img src="https://placekitten.com/201/200">
       <h3>Jerry</h3>
       <p>Bulldog · 5 rokov</p>
@@ -50,6 +52,21 @@
 <footer>
   <p>© 2025 Animal Adoption</p>
 </footer>
+
+
+<script>
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();      // ❌ отменяет переход
+      e.stopPropagation();    // ❌ отменяет клик по карточке
+
+      btn.classList.toggle('liked');
+      btn.textContent = btn.classList.contains('liked') ? '♥' : '♡';
+    });
+  });
+</script>
+
+
 
 </body>
 </html>

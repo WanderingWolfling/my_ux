@@ -10,10 +10,21 @@
 
 <header>
     <div class="logo">Logo</div>
+
     <nav>
-        <a href="#">Home</a>
-        <a href="profile_page.html">Profile</a>
-        <a href="login_page.html">Login</a>
+        <a href="animal_site.html">Home</a>
+
+        <!-- PROFILE DROPDOWN -->
+        <div class="profile-menu">
+            <button class="profile-btn">My profile</button>
+
+            <div class="profile-dropdown">
+        <a href="profile_page.html">O sebe</a>
+        <a href="liked_animals.html">Liked animals</a>
+        <a href="login_page.html">Exit</a>
+            </div>
+
+        </div>
     </nav>
 </header>
 
@@ -25,7 +36,7 @@
 
     <a href="animal_profile.html" class="animal-link">
         <div class="animal-card">
-            <img src="image/vital.jpg" />
+            <img src="image/vital.jpg" alt="Vitalik">
             <h3>Vitalik</h3>
             <p>Mačka</p>
         </div>
@@ -33,7 +44,7 @@
 
     <a href="animal_profile.html" class="animal-link">
         <div class="animal-card">
-            <img src="https://placekitten.com/201/200" />
+            <img src="https://placekitten.com/201/200" alt="Molly">
             <h3>Molly</h3>
             <p>Pes</p>
         </div>
@@ -41,7 +52,7 @@
 
     <a href="animal_profile.html" class="animal-link">
         <div class="animal-card">
-            <img src="https://placekitten.com/202/200" />
+            <img src="https://placekitten.com/202/200" alt="Kotets">
             <h3>Kotets</h3>
             <p>Mačka</p>
         </div>
@@ -49,10 +60,26 @@
 
 </section>
 
-
 <footer>
     <p>© 2025 Animal Adoption — All rights reserved</p>
 </footer>
+
+<!-- DROPDOWN SCRIPT -->
+<script>
+  const profileBtn = document.querySelector('.profile-btn');
+  const dropdown = document.querySelector('.profile-dropdown');
+
+  profileBtn.addEventListener('click', () => {
+    dropdown.style.display =
+      dropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.profile-menu')) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
 
 </body>
 </html>

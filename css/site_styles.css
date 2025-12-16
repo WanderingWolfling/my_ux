@@ -406,14 +406,12 @@ footer {
   font-weight: bold;
   font-size: 18px;
   margin: 10px 0 5px;
-  color: white;
 }
 
 .animals-row .animal-card .meta {
   font-size: 14px;
   display: flex;
   justify-content: space-between;
-  color: rgba(255, 255, 255, 0.9);
   padding: 0 5px;
 }
 
@@ -434,26 +432,6 @@ footer {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Кнопка лайка */
-.animals-row .like-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  z-index: 2;
-}
-
 .animals-row .like-btn:hover {
   background: #fff;
   transform: scale(1.1);
@@ -463,61 +441,6 @@ footer {
   color: #ff4757;
 }
 
-/* ===== PROFILE ACTIONS (если нужны) ===== */
-.profile-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 30px;
-}
-
-.edit-profile-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
-  background: var(--primary);
-  color: white;
-  text-decoration: none;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  font-size: 16px;
-  min-width: 180px;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-}
-
-.edit-profile-btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(141, 135, 197, 0.4);
-}
-
-.logout-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
-  background: #ff6b6b;
-  color: white;
-  text-decoration: none;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  font-size: 16px;
-  min-width: 180px;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-}
-
-.logout-btn:hover {
-  background: #ff5252;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-}
 
 /* Адаптивность */
 @media (max-width: 992px) {

@@ -46,13 +46,28 @@
   </section>
 
   <section class="animal-gallery">
-    <h2>Ďalšie fotografie</h2>
-    <div class="gallery-grid">
-      <img src="https://placekitten.com/200/200">
-      <img src="https://placekitten.com/201/200">
-      <img src="https://placekitten.com/202/200">
-    </div>
-  </section>
+  <h2>Ďalšie fotografie</h2>
+  
+  <button class="gallery-nav-btn gallery-prev" aria-label="Previous photo">‹</button>
+  
+  <div class="gallery-grid" id="photoGallery">
+    <img src="image/vital.jpg" alt="Vitalik photo 1">
+    <img src="image/vital.jpg" alt="Vitalik photo 2">
+    <img src="image/vital.jpg" alt="Vitalik photo 3">
+    <img src="image/vital.jpg" alt="Vitalik photo 4">
+    <img src="image/vital.jpg" alt="Vitalik photo 5">
+    <img src="image/vital.jpg" alt="Vitalik photo 6">
+    <img src="image/vital.jpg" alt="Vitalik photo 7">
+    <img src="image/vital.jpg" alt="Vitalik photo 8">
+  </div>
+  
+  <button class="gallery-nav-btn gallery-next" aria-label="Next photo">›</button>
+  
+  <!-- Опционально: индикаторы прокрутки -->
+  <div class="gallery-indicators" id="galleryIndicators">
+    <!-- Индикаторы будут добавлены через JS -->
+  </div>
+</section>
 
 </main>
 
@@ -83,6 +98,92 @@
   modalOk.addEventListener('click', () => {
     modal.style.display = 'none';
   });
+
+
+
+
+  // Функционал галереи
+const galleryGrid = document.querySelector('.gallery-grid');
+const prevBtn = document.querySelector('.gallery-prev');
+const nextBtn = document.querySelector('.gallery-next');
+const galleryIndicators = document.getElementById('galleryIndicators');
+
+if (galleryGrid) {
+  const scrollAmount = 240; // Шаг прокрутки
+  
+  // Кнопки навигации
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      galleryGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      galleryGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+  
+  // Создание индикаторов
+  if (galleryIndicators) {
+    const imageCount = galleryGrid.children.length;
+    const visibleCount = Math.floor(galleryGrid.clientWidth / 240); // Примерное количество видимых картинок
+    
+    // Создаем индикаторы
+    for (let i = 0; i < Math.ceil(imageCount / visibleCount); i++) {
+      const indicator = document.createElement('button');
+      indicator.className = 'gallery-indicator';
+      indicator.setAttribute('data-index', i);
+      indicator.setAttribute('aria-label', `Go to gallery section ${i + 1}`);
+      
+      indicator.addEventListener('click', () => {
+        const scrollTo = i * visibleCount * 240;
+        galleryGrid.scrollTo({ left: scrollTo, behavior: 'smooth' });
+      });
+      
+      galleryIndicators.appendChild(indicator);
+    }
+    
+    // Обновление активного индикатора при прокрутке
+    galleryGrid.addEventListener('scroll', () => {
+      const scrollPos = galleryGrid.scrollLeft;
+      const indicatorIndex = Math.floor(scrollPos / (visibleCount * 240));
+      
+      document.querySelectorAll('.gallery-indicator').forEach((ind, idx) => {
+        if (idx === indicatorIndex) {
+          ind.classList.add('active');
+        } else {
+          ind.classList.remove('active');
+        }
+      });
+    });
+    
+    // Активируем первый индикатор
+    if (galleryIndicators.firstChild) {
+      galleryIndicators.firstChild.classList.add('active');
+    }
+  }
+  
+  // Автоматическая прокрутка при наведении на края (опционально)
+  galleryGrid.addEventListener('mousemove', (e) => {
+    const rect = galleryGrid.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const width = rect.width;
+    
+    if (x < 50 && prevBtn) {
+      // Курсор у левого края - показываем кнопку "назад"
+      prevBtn.style.opacity = '1';
+      prevBtn.style.transform = 'translateY(-50%) scale(1.1)';
+    } else if (x > width - 50 && nextBtn) {
+      // Курсор у правого края - показываем кнопку "вперед"
+      nextBtn.style.opacity = '1';
+      nextBtn.style.transform = 'translateY(-50%) scale(1.1)';
+    }
+  });
+  
+  // Добавляем класс для стилизованного скроллбара если много фото
+  if (galleryGrid.scrollWidth > galleryGrid.clientWidth) {
+    galleryGrid.classList.add('has-scrollbar');
+  }
+}
 </script>
 
 </body>

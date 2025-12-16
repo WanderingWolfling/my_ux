@@ -329,12 +329,6 @@ footer {
   font-weight: bold;
 }
 
-.profile-info li:nth-child(1):before { content: "👤"; font-size: 10px; }
-.profile-info li:nth-child(2):before { content: "📧"; font-size: 10px; }
-.profile-info li:nth-child(3):before { content: "📱"; font-size: 10px; }
-.profile-info li:nth-child(4):before { content: "📍"; font-size: 10px; }
-.profile-info li:nth-child(5):before { content: "📅"; font-size: 10px; }
-
 .profile-info strong {
   color: var(--primary-dark);
   margin-right: 10px;
@@ -790,33 +784,256 @@ footer {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
   padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
+  position: relative;
 }
 
 .animal-gallery h2 {
-  margin: 0 0 24px 0;
-  font-size: 24px;
+  margin: 0 0 30px 0;
+  font-size: 26px;
   color: var(--text-main);
+  position: relative;
+  padding-bottom: 12px;
 }
 
+.animal-gallery h2:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border-radius: 2px;
+}
+
+/* Горизонтальная прокрутка галереи */
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding: 25px 20px;
+  margin: -10px -20px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Скрыть скроллбар в Firefox */
 }
 
+/* Скрыть скроллбар в Chrome/Safari */
+.gallery-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Но при желании можно стилизованный скроллбар */
+.gallery-grid.has-scrollbar::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+}
+
+.gallery-grid.has-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin: 0 20px;
+}
+
+.gallery-grid.has-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border-radius: 10px;
+}
+
+.gallery-grid.has-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Карточки фото */
 .gallery-grid img {
-  width: 100%;
-  height: 180px;
+  flex: 0 0 auto;
+  width: 220px;
+  height: 165px;
   border-radius: var(--radius-md);
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.1),
+    0 3px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
 }
 
 .gallery-grid img:hover {
-  transform: scale(1.03);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.15),
+    0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* Эффект оверлея при наведении */
+.gallery-grid img::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.3));
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-grid img:hover::after {
+  opacity: 1;
+}
+
+/* Индикаторы прокрутки (точки) */
+.gallery-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.gallery-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.gallery-indicator.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+.gallery-indicator:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* Кнопки навигации для десктопа */
+.gallery-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: none; /* По умолчанию скрыто */
+}
+
+.animal-gallery:hover .gallery-nav-btn {
+  display: flex; /* Показываем только при наведении на галерею */
+}
+
+.gallery-nav-btn:hover {
+  opacity: 1;
+  background: var(--primary-dark);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-prev {
+  left: 10px;
+}
+
+.gallery-next {
+  right: 10px;
+}
+
+/* Показать кнопки всегда на десктопе */
+@media (min-width: 1024px) {
+  .gallery-nav-btn {
+    display: flex;
+  }
+  
+  .gallery-grid {
+    padding: 25px 60px; /* Отступы для кнопок */
+    margin: -10px -30px;
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 1023px) {
+  .gallery-grid img {
+    width: 200px;
+    height: 150px;
+  }
+  
+  .gallery-indicators {
+    display: none; /* Скрыть индикаторы на мобильных */
+  }
+}
+
+@media (max-width: 768px) {
+  .animal-gallery {
+    padding: 25px 20px;
+  }
+  
+  .gallery-grid {
+    gap: 20px;
+    padding: 20px 15px;
+    margin: -10px -15px;
+  }
+  
+  .gallery-grid img {
+    width: 180px;
+    height: 135px;
+  }
+  
+  .animal-gallery h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animal-gallery {
+    padding: 20px 15px;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 0;
+  }
+  
+  .gallery-grid {
+    gap: 15px;
+    padding: 15px 10px;
+    margin: -5px -10px;
+  }
+  
+  .gallery-grid img {
+    width: 160px;
+    height: 120px;
+  }
+  
+  .animal-gallery h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .animal-gallery h2:after {
+    width: 60px;
+  }
 }
 
 /* ===== MODAL STYLES ===== */

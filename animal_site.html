@@ -193,8 +193,8 @@
   /* ===== LIKE BUTTON SCRIPT ===== */
   document.querySelectorAll('.like-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      e.preventDefault();      // ❌ отменяет переход
-      e.stopPropagation();    // ❌ отменяет клик по карточке
+      e.preventDefault();      
+      e.stopPropagation();   
 
       btn.classList.toggle('liked');
       btn.textContent = btn.classList.contains('liked') ? '♥' : '♡';
